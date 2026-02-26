@@ -1,0 +1,30 @@
+name: Docker Image Offline Package
+
+on:
+  workflow_dispatch: # 允许手动触发执行
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull Docker Images
+        run: |
+          # 拉取 OpenProject 17 相关镜像
+          docker pull openproject/openproject:17
+          docker pull postgres:15-alpine
+          docker pull redis:7-alpine
+
+      - name: Save Images to Tar
+        run: |
+          # 打包成一个 tar 文件
+          docker save -o openproject17_bundle.tar \
+            openproject/openproject:17 \
+            postgres:15-alpine \
+            redis:7-alpine
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: openproject-offline-bundle
+          path: openproject17_bundle.tar
+          retention-days: 1 # 文件保留1天，下载完后会自动删除
