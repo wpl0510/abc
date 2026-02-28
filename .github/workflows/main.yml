@@ -10,15 +10,15 @@ jobs:
       - name: Pull Docker Images
         run: |
           # 拉取 OpenProject 17 相关镜像
-          docker pull openproject/openproject:17
+          docker pull openproject/openproject:17.1.2
           docker pull postgres:15-alpine
           docker pull redis:7-alpine
 
       - name: Save Images to Tar
         run: |
           # 打包成一个 tar 文件
-          docker save -o openproject17_bundle.tar \
-            openproject/openproject:17 \
+          docker save -o openproject17_latest.tar \
+            openproject/openproject:17.1.2 \
             postgres:15-alpine \
             redis:7-alpine
 
