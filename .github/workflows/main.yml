@@ -25,6 +25,6 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: openproject-offline-bundle
-          path: openproject17_bundle.tar
+          name: openproject-offline-1712
+          path: openproject17_latest.tar
           retention-days: 1 # 文件保留1天，下载完后会自动删除
